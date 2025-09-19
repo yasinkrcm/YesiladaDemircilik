@@ -163,13 +163,13 @@ export default function Home({ heroImage, projectMedia }) {
               <div>
                 <div className="text-sm text-black">Telefon</div>
                 <p className="mt-1">
-                  <a className="hover:underline text-black" href="tel:+905555555555">+90 555 555 55 55</a>
+                  <a className="hover:underline text-black" href="tel:+905418692080">+90 541 869 2080</a>
                 </p>
               </div>
               <div>
                 <div className="text-sm text-black">E-posta</div>
                 <p className="mt-1">
-                  <a className="hover:underline text-black" href="mailto:info@yesilada.com">info@yesilada.com</a>
+                  <a className="hover:underline text-black" href="mailto:bakikuluz@gmail.com">bakikuluz@gmail.com</a>
                 </p>
               </div>
               <div>
