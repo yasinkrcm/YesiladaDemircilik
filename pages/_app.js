@@ -6,9 +6,8 @@ import Head from "next/head";
 export default function MyApp({ Component, pageProps }) {
   const siteTitle = "Yeşil Ada Demircilik";
   const siteDescription = "Çelik konstrüksiyon, demir kesim ve kaynak çözümleri";
-  const siteImage = "/images/Dükkan.jpg"; // served from public/images/
-  const siteImageEncoded = "/images/Dükkan.jpg"; // URL-encoded ü
-  const siteUrl = "https://www.yesiladademircilik.com"; // update when deploying
+  const siteImageEncoded = "/images/D%C3%BCkkan.jpg"; // URL-encoded ü (public/images/Dükkan.jpg)
+  const siteUrl = "https://www.yesiladademircilik.com";
 
   return (
     <div className="min-h-full flex flex-col bg-black">
@@ -31,12 +30,10 @@ export default function MyApp({ Component, pageProps }) {
         <meta name="twitter:description" content={siteDescription} />
         <meta name="twitter:image" content={siteImageEncoded} />
 
-        {/* Icons */}
+        {/* Icons - use the encoded path only */}
         <link rel="icon" href={siteImageEncoded} />
         <link rel="shortcut icon" href={siteImageEncoded} />
         <link rel="apple-touch-icon" href={siteImageEncoded} />
-        {/* Non-encoded fallback */}
-        <link rel="icon" href={siteImage} />
       </Head>
       <Navbar />
       <main className="flex-1"> 
