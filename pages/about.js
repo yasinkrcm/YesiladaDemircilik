@@ -23,6 +23,20 @@ export async function getStaticProps() {
     return files;
   }
 
+  // 1) Hard-prefer a specific storefront photo in public/images/Dükkan.jpg (and common variants)
+  const preferredCandidates = [
+    path.join(publicDir, "images", "Dükkan.jpg"),
+    path.join(publicDir, "images", "Dükkan.JPG"),
+    path.join(publicDir, "images", "dukkan.jpg"),
+    path.join(publicDir, "images", "dukkan.JPG"),
+  ];
+  const preferredExisting = preferredCandidates.find((p) => fs.existsSync(p));
+  if (preferredExisting) {
+    const relPreferred = "/" + path.relative(publicDir, preferredExisting).replace(/\\\\/g, "/");
+    return { props: { coverImage: relPreferred } };
+  }
+
+  // 2) Otherwise, scan all public/ for images and pick a good one
   const allFiles = walk(publicDir);
   const images = allFiles
     .filter((fullPath) => allowedImageExts.has(path.extname(fullPath).toLowerCase()))
@@ -80,7 +94,7 @@ export default function About({ coverImage }) {
       <section className="container-px mx-auto py-10 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-200">
-            <Image src={coverImage} alt="Atölye / Dükkan görüntüsü" fill className="object-cover" />
+            <Image src="/images/Dükkan.jpg" alt="Atölye / Dükkan görüntüsü" fill className="object-cover" />
           </div>
           <div>
             <h2 className="text-2xl font-semibold text-white">Neden Yeşil Ada?</h2>

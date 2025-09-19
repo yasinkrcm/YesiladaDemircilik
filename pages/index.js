@@ -40,8 +40,23 @@ export async function getStaticProps() {
     })
     .filter(Boolean);
 
-  const heroImage = media.find((m) => m.type === "image") || { src: "/window.svg", type: "image" };
-  const projectMedia = media.filter((m) => m.type === "image").slice(0, 6);
+  // Prefer Dükkan.jpg for hero if it exists
+  const dukkanFsPath = path.join(publicDir, "images", "Dükkan.jpg");
+  const dukkanHero = fs.existsSync(dukkanFsPath)
+    ? { src: "/images/D%C3%BCkkan.jpg", type: "image" }
+    : null;
+
+  const heroImage = dukkanHero || media.find((m) => m.type === "image") || { src: "/window.svg", type: "image" };
+  // Exclude Dükkan.jpg in any folder from projects (handle backslashes and URL-encoded)
+  const projectMedia = media
+    .filter((m) => {
+      if (m.type !== "image") return false; // keep only images anyway
+      const normalized = (m.src || "").replace(/\\/g, "/");
+      if (/\/(images\/)?d[uü]kkan\.jpe?g$/i.test(normalized)) return false;
+      if (/d%C3%BCkkan\.jpe?g$/i.test(normalized)) return false;
+      return true;
+    })
+    .slice(0, 6);
 
   return { props: { heroImage, projectMedia } };
 }
@@ -96,7 +111,7 @@ export default function Home({ heroImage, projectMedia }) {
       <section className="container-px mx-auto py-16 sm:py-24" id="hizmetler">
         <h2 className="section-title text-white">Hizmetler</h2>
         <p className="section-subtitle text-white">İhtiyaçlarınıza özel profesyonel çözümler</p>
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { title: "Demir Kesim", desc: "CNC, lazer ve plazma ile hassas kesim" },
             { title: "Çelik Konstrüksiyon", desc: "Sanayi tesisleri, platformlar, çatı sistemleri" },
@@ -123,7 +138,7 @@ export default function Home({ heroImage, projectMedia }) {
       <section className="container-px mx-auto py-16 sm:py-24">
         <h2 className="section-title text-white">Referanslar / Projeler</h2>
         <p className="section-subtitle text-white">Tamamladığımız bazı çalışmalar</p>
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {(projectMedia.length ? projectMedia : Array.from({ length: 6 }).map(() => ({ src: "/window.svg" }))).map((item, i) => (
             <motion.div key={(item.src || "fallback") + i} className="card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
               <div className="aspect-video relative overflow-hidden rounded-lg bg-gray-800">
@@ -148,13 +163,13 @@ export default function Home({ heroImage, projectMedia }) {
               <div>
                 <div className="text-sm text-black">Telefon</div>
                 <p className="mt-1">
-                  <a className="hover:underline text-black" href="tel:+905418692080">+90 541 869 2080</a>
+                  <a className="hover:underline text-black" href="tel:+905555555555">+90 555 555 55 55</a>
                 </p>
               </div>
               <div>
                 <div className="text-sm text-black">E-posta</div>
                 <p className="mt-1">
-                  <a className="hover:underline text-black" href="mailto:bakikuluz@gmail.com">bakikuluz@gmail.com</a>
+                  <a className="hover:underline text-black" href="mailto:info@yesilada.com">info@yesilada.com</a>
                 </p>
               </div>
               <div>

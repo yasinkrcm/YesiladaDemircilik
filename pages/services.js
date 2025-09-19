@@ -17,7 +17,7 @@ export default function Services() {
         {items.map(({ title, desc, Icon }, idx) => (
           <motion.div
             key={title}
-            className="card"
+            className="card text-black"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -28,9 +28,9 @@ export default function Services() {
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-red-600/10 text-red-500 border border-red-700/30">
                 <Icon className="h-5 w-5" />
               </span>
-              <h3 className="text-white font-semibold text-lg">{title}</h3>
+              <h3 className="text-black font-semibold text-lg">{title}</h3>
             </div>
-            <p className="mt-3 text-gray-400">{desc}</p>
+            <p className="mt-3 text-black">{desc}</p>
           </motion.div>
         ))}
       </div>

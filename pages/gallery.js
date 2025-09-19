@@ -39,6 +39,14 @@ export async function getStaticProps() {
       };
     })
     .filter(Boolean)
+    // Exclude Dükkan.jpg with backslash or URL-encoded variants
+    .filter((m) => {
+      if (m.type !== "image") return true;
+      const normalized = (m.src || "").replace(/\\/g, "/");
+      if (/\/(images\/)?d[uü]kkan\.jpe?g$/i.test(normalized)) return false;
+      if (/d%C3%BCkkan\.jpe?g$/i.test(normalized)) return false;
+      return true;
+    })
     // Prefer images first for nicer grids
     .sort((a, b) => (a.type === b.type ? 0 : a.type === "image" ? -1 : 1));
 
