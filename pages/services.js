@@ -10,9 +10,9 @@ export default function Services() {
   ];
 
   return (
-    <div className="container-px mx-auto py-16 sm:py-24">
-      <h1 className="section-title">Hizmetler</h1>
-      <p className="section-subtitle">İhtiyaçlarınıza özel profesyonel çözümler</p>
+    <div className="container-px mx-auto py-16 sm:py-24 text-white">
+      <h1 className="section-title text-white">Hizmetler</h1>
+      <p className="section-subtitle text-white-400">İhtiyaçlarınıza özel profesyonel çözümler</p>
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map(({ title, desc, Icon }, idx) => (
           <motion.div
