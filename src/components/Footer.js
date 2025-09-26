@@ -22,8 +22,8 @@ export default function Footer() {
           </div>
           <div className="text-gray-400">
             <h4 className="text-white font-semibold">İletişim</h4>
-            <p className="mt-3">E-posta: info@yesilada.com</p>
-            <p>Telefon: +90 555 555 55 55</p>
+            <p className="mt-3">E-posta: bakikuluz@gmail.com</p>
+            <p>Telefon: +90 541 869 2080</p>
           </div>
         </div>
         <div className="mt-8 border-t border-gray-800 pt-6 text-gray-500 text-sm">
